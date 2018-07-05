@@ -11,9 +11,12 @@ from sklearn.preprocessing import StandardScaler
 
 data = pd.read_csv('159_matrix_numminmax_Nom.csv',header = None) 
 # #############################################################################
-# Compute DBSCAN
 
-model = DBSCAN(eps=1.5, min_samples= 2).fit(data)
+def CateFunc(x,y):
+    return (np.sum(np.not_equal(x,y)))/20
+
+# Compute DBSCAN
+model = DBSCAN(eps=1.8, min_samples=3 ,metric = CateFunc).fit(data)
 outliers_df = pd.DataFrame(data)
 print(model)
 print (Counter(model.labels_))
